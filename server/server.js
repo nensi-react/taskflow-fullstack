@@ -6,8 +6,10 @@ const initSqlJs = require("sql.js");
 
 const app = express();
 const PORT = 5000;
-const DB_DIR = path.join(__dirname, "data");
-const DB_PATH = path.join(DB_DIR, "taskflow.sqlite");
+const DB_DIR = process.env.VERCEL
+  ? path.join("/tmp", "taskflow-data")
+  : path.join(__dirname, "data");
+  const DB_PATH = path.join(DB_DIR, "taskflow.sqlite");
 
 app.use(cors());
 app.use(express.json());
